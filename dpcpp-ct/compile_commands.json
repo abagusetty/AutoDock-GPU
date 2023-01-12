@@ -1,0 +1,108 @@
+[
+    {
+        "command": "nvcc \\\"/soft/compilers/cuda/cuda-10.2.89/include\\\" \\\"/soft/compilers/cuda/cuda-10.2.89/lib64\\\" -D__CUDACC__=1",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty"
+    },
+    {
+        "command": "nvcc /soft/compilers/cuda/cuda-10.2.89/include /soft/compilers/cuda/cuda-10.2.89/lib64 -D__CUDACC__=1",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" -o./bin/adgpu_analysis -O3 -DTOOLMODE ./host/src/calcenergy.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/calcenergy.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" -o./bin/adgpu_analysis -O3 -DTOOLMODE ./host/src/getparameters.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/getparameters.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" -o./bin/adgpu_analysis -O3 -DTOOLMODE ./host/src/main.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/main.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" -o./bin/adgpu_analysis -O3 -DTOOLMODE ./host/src/miscellaneous.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/miscellaneous.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" -o./bin/adgpu_analysis -O3 -DTOOLMODE ./host/src/processgrid.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/processgrid.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" -o./bin/adgpu_analysis -O3 -DTOOLMODE ./host/src/processligand.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/processligand.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" -o./bin/adgpu_analysis -O3 -DTOOLMODE ./host/src/processresult.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/processresult.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" -o./bin/adgpu_analysis -O3 -DTOOLMODE ./host/src/setup.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/setup.cpp"
+    },
+    {
+        "command": "ld -plugin /usr/lib64/gcc/x86_64-suse-linux/7/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccUps0Tj.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -melf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o ./bin/adgpu_analysis /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/7/crtbegin.o /tmp/ccR2PtEj.o /tmp/ccOOG73j.o /tmp/ccWARtnn.o /tmp/cc5o5jtj.o /tmp/ccyo1Slm.o /tmp/cct5wIEm.o /tmp/ccz6ZQMj.o /tmp/ccM23s7l.o /usr/lib64/gcc/x86_64-suse-linux/7/crtend.o /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crtn.o",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty"
+    },
+    {
+        "command": "nvcc -c -DN64WI -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -D__CUDACC__=1 ./cuda/kernels.cu",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernels.cu"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/calcenergy.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/calcenergy.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/getparameters.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/getparameters.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/main.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/main.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/miscellaneous.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/miscellaneous.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/performdocking.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/processgrid.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/processgrid.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/processligand.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/processligand.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/processresult.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/processresult.cpp"
+    },
+    {
+        "command": "c++ -c -std=c++11 -I./common -I./host/inc -I/soft/compilers/cuda/cuda-10.2.89/include -I./cuda -DVERSION=\\\"fd7b1e06be68801223b20d57cbe58d0a9cc1ac17\\\" kernels.o -o./bin/autodock_gpu_64wi -DGPU_DEVICE -DN64WI -O3 ./host/src/setup.cpp",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty",
+        "file": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/setup.cpp"
+    },
+    {
+        "command": "ld -plugin /usr/lib64/gcc/x86_64-suse-linux/7/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccANVHAa.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -melf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o ./bin/autodock_gpu_64wi /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/7/crtbegin.o /tmp/ccUIVqxc.o /tmp/ccqrJXGa.o /tmp/ccMvPDSb.o /tmp/ccUUXvG9.o /tmp/cc4GM76a.o /tmp/ccipbeNb.o /tmp/cct9wk48.o /tmp/ccYZby59.o /tmp/ccbLYGba.o -rpath=/soft/compilers/cuda/cuda-10.2.89/lib64: kernels.o /usr/lib64/gcc/x86_64-suse-linux/7/crtend.o /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crtn.o",
+        "directory": "/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty"
+    }
+]

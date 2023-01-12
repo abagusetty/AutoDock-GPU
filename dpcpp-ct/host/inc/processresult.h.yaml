@@ -1,0 +1,270 @@
+---
+MainSourceFile:  '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/sycl/host/inc/processresult.h'
+Replacements:
+  - FilePath:        '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/inc/processresult.h'
+    Offset:          1438
+    Length:          0
+    ReplacementText: ' dpct_type_123411'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+MainSourceFilesDigest:
+  - MainSourceFile:  '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/inc/processresult.h'
+    Digest:          4fdd47559e6741e7587c9138d2e56098
+DpctVersion:     16.0.0
+MainHelperFileName: dpct
+USMLevel:        ''
+FeatureMap:
+  atomic.hpp:
+    atomic_fetch_add:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/calcMergeEneGra.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/calcenergy.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel2.cu'
+      FeatureName:     atomic_fetch_add
+      SubFeatureMap:   {}
+  device.hpp:
+    dev_mgr:
+      IsCalled:        false
+      FeatureName:     ''
+      SubFeatureMap:
+        dev_mgr_current_device_id:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+          FeatureName:     'dev_mgr::current_device_id'
+          SubFeatureMap:   {}
+        dev_mgr_device_count:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+          FeatureName:     'dev_mgr::device_count'
+          SubFeatureMap:   {}
+        dev_mgr_get_device:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+          FeatureName:     'dev_mgr::get_device'
+          SubFeatureMap:   {}
+    device_ext:
+      IsCalled:        false
+      FeatureName:     ''
+      SubFeatureMap:
+        device_ext_get_device_info_return_info:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+          FeatureName:     'device_ext::get_device_info'
+          SubFeatureMap:   {}
+        device_ext_get_memory_info:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+          FeatureName:     device_ext_get_memory_info
+          SubFeatureMap:   {}
+        device_ext_queues_wait_and_throw:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel1.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel2.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel3.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel4.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel_ad.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel_adam.cu'
+          FeatureName:     'device_ext::queues_wait_and_throw'
+          SubFeatureMap:   {}
+        device_ext_reset:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel1.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel2.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel3.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel4.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel_ad.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel_adam.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernels.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+          FeatureName:     'device_ext::reset'
+          SubFeatureMap:   {}
+    device_info:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+      FeatureName:     device_info
+      SubFeatureMap:
+        device_info_get_major_version:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+          FeatureName:     'device_info::get_major_version'
+          SubFeatureMap:   {}
+        device_info_get_name:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+          FeatureName:     'device_info::get_name'
+          SubFeatureMap:   {}
+    get_current_device:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel1.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+      FeatureName:     get_current_device
+      SubFeatureMap:   {}
+    get_default_queue:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel1.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel2.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel3.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel4.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel_ad.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel_adam.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernels.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+      FeatureName:     get_default_queue
+      SubFeatureMap:   {}
+    select_device:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+      FeatureName:     select_device
+      SubFeatureMap:   {}
+  dpct.hpp:
+    dpct_align_and_inline:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/calcenergy.cu'
+      FeatureName:     '__dpct_align__(n) and __dpct_inline__'
+      SubFeatureMap:   {}
+    dpct_compatibility_temp:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel3.cu'
+      FeatureName:     DPCT_COMPATIBILITY_TEMP
+      SubFeatureMap:   {}
+  memory.hpp:
+    constant_memory_alias:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernels.cu'
+      FeatureName:     constant_memory
+      SubFeatureMap:   {}
+    device_memory:
+      IsCalled:        false
+      FeatureName:     ''
+      SubFeatureMap:
+        device_memory_get_ptr:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernels.cu'
+          FeatureName:     'device_memory::get_ptr'
+          SubFeatureMap:   {}
+        device_memory_init:
+          IsCalled:        true
+          CallerSrcFiles:
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel1.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel2.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel3.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel4.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel_ad.cu'
+            - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel_adam.cu'
+          FeatureName:     'device_memory::init'
+          SubFeatureMap:   {}
+    dpct_memcpy:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+      FeatureName:     dpct_memcpy
+      SubFeatureMap:   {}
+    dpct_memcpy_2d:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+      FeatureName:     dpct_memcpy
+      SubFeatureMap:   {}
+    dpct_memcpy_3d:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+      FeatureName:     dpct_memcpy
+      SubFeatureMap:   {}
+    memcpy_direction:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/host/src/performdocking.cpp.Cuda'
+      FeatureName:     memcpy_direction
+      SubFeatureMap:   {}
+  util.hpp:
+    select_from_sub_group:
+      IsCalled:        true
+      CallerSrcFiles:
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/calcMergeEneGra.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/calcenergy.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel2.cu'
+        - '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty/cuda/kernel4.cu'
+      FeatureName:     select_from_sub_group
+      SubFeatureMap:   {}
+CompileTargets:  {}
+OptionMap:
+  AnalysisScopePath:
+    Value:           '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty'
+    Specified:       false
+  AsyncHandler:
+    Value:           'false'
+    Specified:       false
+  CommentsEnabled:
+    Value:           'false'
+    Specified:       false
+  CompilationsDir:
+    Value:           '/gpfs/jlse-fs0/users/abagusetty/autodock-gpu-abagusetty'
+    Specified:       true
+  CtadEnabled:
+    Value:           'false'
+    Specified:       false
+  CustomHelperFileName:
+    Value:           dpct
+    Specified:       false
+  EnablepProfiling:
+    Value:           'false'
+    Specified:       false
+  ExperimentalFlag:
+    Value:           '0'
+    Specified:       false
+  ExplicitClNamespace:
+    Value:           'false'
+    Specified:       false
+  ExplicitNamespace:
+    Value:           '20'
+    Specified:       false
+  ExtensionDDFlag:
+    Value:           '0'
+    Specified:       false
+  ExtensionDEFlag:
+    Value:           '4294967295'
+    Specified:       false
+  NDRangeDim:
+    Value:           '3'
+    Specified:       false
+  NoDRYPattern:
+    Value:           'false'
+    Specified:       false
+  OptimizeMigration:
+    Value:           'false'
+    Specified:       false
+  ProcessAll:
+    Value:           'true'
+    Specified:       true
+  RuleFile:
+    Value:           ''
+    Specified:       false
+  SyclNamedLambda:
+    Value:           'false'
+    Specified:       false
+  UsmLevel:
+    Value:           '1'
+    Specified:       false
+...
