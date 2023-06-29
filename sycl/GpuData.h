@@ -25,8 +25,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #ifndef GPUDATADOTH
 #define GPUDATADOTH
-#include <sycl/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include <float.h>
 
 static const int   TERMBITS         = 10;
@@ -38,26 +36,9 @@ static const float MAXREDUCE        = (float)(1 << (31 - TERMBITS - 4)); // 2^(3
 static const float MAXENERGY        = FLT_MAX / 100.0f; // Used to cap absurd energies so placeholder energy is always skipped in sorts
 static const float MAXFORCE         = FLT_MAX / 100.0f; // Used to cap absurd gradients
 
-/*
-DPCT1000:64: Error handling if-stmt was detected but could not be rewritten.
-*/
-/*
-DPCT1009:66: SYCL uses exceptions to report errors and does not use the error
-codes. The original code was commented out and a warning string was inserted.
-You need to rewrite this code.
-*/
-#define RTERROR(status, s)                                                     \
- /* DPCT_ORIG 	if (status != cudaSuccess) { \*/                                \
- if (status != 0) {                                                            \
-  /* DPCT_ORIG 		printf("%s %s\n", s, cudaGetErrorString(status)); \*/         \
-  printf(                                                                      \
-      "%s %s\n", s,                                                            \
-      "cudaGetErrorString is not supported" /*cudaGetErrorString(status)*/);   \
-  assert(0);                                                                   \
-  /* DPCT_ORIG 		cudaDeviceReset(); \*/                                        \
-  dpct::get_current_device().reset();                                          \
-  exit(-1);                                                                    \
- }
+
+// Use (void) to silence unused warnings.
+#define assertm(exp, msg) assert(((void)msg, exp))
 
 #define SYNCHRONOUS
 #ifdef SYNCHRONOUS

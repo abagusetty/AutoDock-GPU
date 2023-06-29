@@ -22,51 +22,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 */
 
-#include <sycl/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include <cstdint>
 #include <cassert>
 #include "defines.h"
 #include "calcenergy.h"
 #include "GpuData.h"
 
-inline uint64_t llitoulli(int64_t l)
-{
-	uint64_t u;
-        /*
-        DPCT1053:173: Migration of device assembly code is not supported.
-        */
-        asm("mov.b64    %0, %1;" : "=l"(u) : "l"(l));
-        return u;
+#define WARPMINIMUMEXCHANGE(tgx, v0, k0, mask)                          \
+{                                                                       \
+  float v1 = v0;                                                        \
+  int k1 = k0;                                                          \
+  int otgx = tgx ^ mask;                                                \
+  float v2 = sycl::ext::oneapi::experimental::this_sub_group().shuffle(v0, otgx); \
+  int k2 = sycl::ext::oneapi::experimental::this_sub_group().shuffle(k0, otgx); \
+  int flag = ((v1 < v2) ^ (tgx > otgx)) && (v1 != v2);                  \
+  k0 = flag ? k1 : k2;                                                  \
+  v0 = flag ? v1 : v2;                                                  \
 }
-
-inline int64_t ullitolli(uint64_t u)
-{
-	int64_t l;
-        /*
-        DPCT1053:174: Migration of device assembly code is not supported.
-        */
-        asm("mov.b64    %0, %1;" : "=l"(l) : "l"(u));
-        return l;
-}
-
-/*
-DPCT1023:33: The SYCL sub-group does not support mask options for
-dpct::select_from_sub_group.
-*/
-#define WARPMINIMUMEXCHANGE(tgx, v0, k0, mask)                                 \
- {                                                                             \
-  float v1 = v0;                                                               \
-  int k1 = k0;                                                                 \
-  int otgx = tgx ^ mask;                                                       \
-  /* DPCT_ORIG 		float v2    = __shfl_sync(0xffffffff, v0, otgx); \*/          \
-  float v2 = dpct::select_from_sub_group(item.get_sub_group(), v0, otgx);  \
-  /* DPCT_ORIG 		int k2      = __shfl_sync(0xffffffff, k0, otgx); \*/          \
-  int k2 = dpct::select_from_sub_group(item.get_sub_group(), k0, otgx);    \
-  int flag = ((v1 < v2) ^ (tgx > otgx)) && (v1 != v2);                         \
-  k0 = flag ? k1 : k2;                                                         \
-  v0 = flag ? v1 : v2;                                                         \
- }
 
 #define WARPMINIMUM2(tgx, v0, k0) \
 	WARPMINIMUMEXCHANGE(tgx, v0, k0, 1) \
@@ -142,66 +114,56 @@ performance if there is no access to global memory.
  /* DPCT_ORIG 	__syncthreads();*/                                              \
  item.barrier();
 
-#define REDUCEFLOATSUM(value, pAccumulator)
- if (item.get_local_id(0) == 0)
- {
-  *pAccumulator = 0;
- }
+#define REDUCEFLOATSUM(value, pAccumulator)                             \
+ if (sycl::ext::oneapi::experimental::this_nd_item().get_local_id(0) == 0) \
+ {                                                                      \
+  *pAccumulator = 0;                                                    \
+ }                                                                      \
+                                                                        \
+ sycl::atomic_fence(sycl::memory_order::acq_rel, sycl::memory_scope::device); \
+ sycl::ext::oneapi::experimental::this_nd_item().barrier();             \
+                                                                        \
+ sycl::sub_group sg = sycl::ext::oneapi::experimental::this_nd_item().get_sub_group(); \
+ if (sycl::any_of_group(sg,                                             \
+                        (0xffffffff &                                   \
+                         (0x1 << sg.get_local_linear_id())) &&          \
+                        value != 0.0f))                                 \
+ {                                                                      \
+  uint32_t tgx = sycl::ext::oneapi::experimental::this_nd_item().get_local_id(2) & cData.warpmask; \
+  value += dpct::select_from_sub_group(sg, value, tgx ^ 1);             \
+  value += dpct::select_from_sub_group(sg, value, tgx ^ 2);             \
+  value += dpct::select_from_sub_group(sg, value, tgx ^ 4);             \
+  value += dpct::select_from_sub_group(sg, value, tgx ^ 8);             \
+  if (tgx == 0)                                                         \
+  {                                                                     \
+   dpct::atomic_fetch_add(pAccumulator, value);                         \
+  }                                                                     \
+ }                                                                      \
+                                                                        \
+ sycl::atomic_fence(sycl::memory_order::acq_rel, sycl::memory_scope::device); \
+ sycl::ext::oneapi::experimental::this_nd_item().barrier();             \
+ value = (float)(*pAccumulator);                                        \
+ sycl::ext::oneapi::experimental::this_nd_item().barrier();
 
- sycl::atomic_fence(sycl::memory_order::acq_rel, sycl::memory_scope::device);
- item.barrier();
-
- sycl::sub_group sg = item.get_sub_group();
- if (sycl::any_of_group(sg,
-                        (0xffffffff &
-                         (0x1 << sg.get_local_linear_id())) &&
-                        value != 0.0f))
- {
-  uint32_t tgx = item.get_local_id(2) & cData.warpmask;
-  value += dpct::select_from_sub_group(sg, value, tgx ^ 1);
-  value += dpct::select_from_sub_group(sg, value, tgx ^ 2);
-  value += dpct::select_from_sub_group(sg, value, tgx ^ 4);
-  value += dpct::select_from_sub_group(sg, value, tgx ^ 8);
-  if (tgx == 0)
-  {
-   dpct::atomic_fetch_add(pAccumulator, value);
-  }
- }
-
- sycl::atomic_fence(sycl::memory_order::acq_rel, sycl::memory_scope::device);
- item.barrier();
- value = (float)(*pAccumulator);
- item.barrier();
-
-static dpct::constant_memory<GpuData, 0> cData;
+static sycl::ext::oneapi::experimental::device_global<GpuData> cData;
 static GpuData cpuData;
 
 void SetKernelsGpuData(GpuData *pData) {
-/* DPCT_ORIG 	status = cudaMemcpyToSymbol(cData, pData, sizeof(GpuData));*/
-  status = (dpct::get_default_queue()
-            .memcpy(cData.get_ptr(), pData, sizeof(GpuData))
-            .wait(),
-            0);
-  RTERROR(status, "SetKernelsGpuData copy to cData failed");
+  get_sycl_queue()->memcpy(cData.get(), pData, sizeof(GpuData)).wait();
   memcpy(&cpuData, pData, sizeof(GpuData));
 }
 
 void GetKernelsGpuData(GpuData *pData) {
-/* DPCT_ORIG 	status = cudaMemcpyFromSymbol(pData, cData, sizeof(GpuData));*/
-  status = (dpct::get_default_queue()
-            .memcpy(pData, cData.get_ptr(), sizeof(GpuData))
-            .wait(),
-            0);
-  RTERROR(status, "GetKernelsGpuData copy From cData failed");
+  get_sycl_queue()->memcpy(pData, cData.get(), sizeof(GpuData)).wait();
 }
 
 // Kernel files
 #include "calcenergy.cpp"
 #include "calcMergeEneGra.cpp"
-#include "auxiliary_genetic.dp.cpp"
-#include "kernel1.dp.cpp"
-#include "kernel2.dp.cpp"
-#include "kernel3.dp.cpp"
-#include "kernel4.dp.cpp"
-#include "kernel_ad.dp.cpp"
-#include "kernel_adam.dp.cpp"
+#include "auxiliary_genetic.cpp"
+#include "kernel1.cpp"
+#include "kernel2.cpp"
+#include "kernel3.cpp"
+#include "kernel4.cpp"
+#include "kernel_ad.cpp"
+#include "kernel_adam.cpp"

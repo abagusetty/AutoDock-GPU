@@ -1,5 +1,3 @@
-#include <sycl/sycl.hpp>
-#include <dpct/dpct.hpp>
 /*
 
 AutoDock-GPU, an OpenCL implementation of AutoDock 4.2 running a Lamarckian
@@ -29,8 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 // -------------------------------------------------------
 //
 // -------------------------------------------------------
-/* DPCT_ORIG inline __device__ uint32_t gpu_rand(uint32_t* prng_states)*/
-inline uint32_t gpu_rand(uint32_t *prng_states, sycl::nd_item<3> item_ct1)
+__attribute__((always_inline)) uint32_t gpu_rand(uint32_t *prng_states, sycl::nd_item<1> item)
 // The GPU device function generates a random int
 // with a linear congruential generator.
 // Each thread (supposing num_of_runs*pop_size blocks and NUM_OF_THREADS_PER_BLOCK threads per block)
@@ -41,41 +38,34 @@ inline uint32_t gpu_rand(uint32_t *prng_states, sycl::nd_item<3> item_ct1)
 	uint state;
 	// Current state of the threads own PRNG
 	// state = prng_states[get_group_id(0)*NUM_OF_THREADS_PER_BLOCK + get_local_id(0)];
-/* DPCT_ORIG 	state = prng_states[blockIdx.x * blockDim.x + threadIdx.x];*/
-        state =
-            prng_states[item_ct1.get_group(2) * item_ct1.get_local_range(2) +
-                        item_ct1.get_local_id(2)];
+        state = prng_states[item.get_global_id(0)];
         // Calculating next state
 	state = (RAND_A*state+RAND_C);
 	// Saving next state to memory
 	// prng_states[get_group_id(0)*NUM_OF_THREADS_PER_BLOCK + get_local_id(0)] = state;
-/* DPCT_ORIG 	prng_states[blockIdx.x * blockDim.x + threadIdx.x] = state;*/
-        prng_states[item_ct1.get_group(2) * item_ct1.get_local_range(2) +
-                    item_ct1.get_local_id(2)] = state;
+        prng_states[item.get_global_id(0)] = state;
         return state;
 }
 
 // -------------------------------------------------------
 //
 // -------------------------------------------------------
-/* DPCT_ORIG inline __device__ float gpu_randf(uint32_t* prng_states)*/
-SYCL_EXTERNAL inline float gpu_randf(uint32_t *prng_states,
-                                     sycl::nd_item<3> item_ct1)
+SYCL_EXTERNAL __attribute__((always_inline)) float gpu_randf(uint32_t *prng_states,
+                                                             sycl::nd_item<1> item)
 // The GPU device function generates a
 // random float greater than (or equal to) 0 and less than 1.
 // It uses gpu_rand() function.
 {
 	float state;
 	// State will be between 0 and 1
-        state = ((float)gpu_rand(prng_states, item_ct1) / (float)MAX_UINT) * 0.999999f;
+        state = ((float)gpu_rand(prng_states, item) / (float)MAX_UINT) * 0.999999f;
         return state;
 }
 
 // -------------------------------------------------------
 //
 // -------------------------------------------------------
-/* DPCT_ORIG inline __device__ void map_angle(float& angle)*/
-SYCL_EXTERNAL inline void map_angle(float &angle)
+SYCL_EXTERNAL __attribute__((always_inline)) void map_angle(float &angle)
 // The GPU device function maps
 // the input parameter to the interval 0...360
 // (supposing that it is an angle).
@@ -88,4 +78,3 @@ SYCL_EXTERNAL inline void map_angle(float &angle)
 		angle += 360.0f;
 	}
 }
-
